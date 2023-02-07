@@ -1,0 +1,54 @@
+//The code uses Morris Traversal to Traverse the tree in-order in Constant Space.
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* findPred(TreeNode* root) {
+        TreeNode* current = root->left;
+        while (current->right != nullptr && current->right != root)
+            current = current->right;
+        return current;
+    }
+    int kthSmallest(TreeNode* root, int k) {
+        int printed = 0;
+        TreeNode* current = root;
+        int answer = 0;
+        while (current != nullptr) {
+            if (!current->left) {
+                printed++;
+                if (printed == k) {
+                    answer = current->val;
+                    break;
+                } else {
+                    current = current->right;
+                }
+            } else {
+                TreeNode* pred = findPred(current);
+                if (pred->right) {
+                    pred->right = nullptr;
+                    printed++;
+                    if (printed == k) {
+                        answer = current->val;
+                        break;
+                    } else {
+                        current = current->right;
+                    }
+                } else {
+                    pred->right = current;
+                    current = current->left;
+                }
+            }
+        }
+        return answer;
+    }
+};
