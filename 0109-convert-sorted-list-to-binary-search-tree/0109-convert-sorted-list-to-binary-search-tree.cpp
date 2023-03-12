@@ -27,7 +27,9 @@ public:
             return nullptr;
         }
         int mid = (high+low)/2;
+        //root is middle
         TreeNode* current = new TreeNode(list[mid]->val);
+        //get left and right;
         current->left = getTree(low, mid-1,list);
         current->right = getTree(mid+1,high,list);
         return current;
@@ -35,6 +37,8 @@ public:
     }
     TreeNode* sortedListToBST(ListNode* head) {
         ListNode* current = head;
+        
+        //create an array based tree (so that we can access middle element in constant time)
         vector<ListNode*> list;
         while(current != nullptr){
             list.push_back(current);
