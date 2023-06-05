@@ -1,6 +1,10 @@
 class Solution:
-    #If the points are on a straight line, there x difference and y difference must
-    #always be same for all points
+    #We will use concepts of slop
+    # slop is given as m = chagne in y/ change in x
+    # m1 = (y1-y0)/ (x1- x0)
+    # m2 = (y2 - y0) / (x2 - x0)
+    #
+    #
     def checkStraightLine(self, coordinates: List[List[int]]) -> bool:
         xDist = coordinates[1][0] - coordinates[0][0]
         yDist = coordinates[1][1]- coordinates[0][1]
