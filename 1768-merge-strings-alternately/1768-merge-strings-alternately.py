@@ -1,20 +1,12 @@
-class Solution(object):
-    def mergeAlternately(self, word1, word2):
-        """
-        :type word1: str
-        :type word2: str
-        :rtype: str
-        """
-        i = 0
-        j = 0
-        result = []
-        while i < len(word1) or j < len(word2):
-            if i < len(word1):
-                result.append(word1[i])
-                i += 1
-            if j < len(word2):
-                result.append(word2[j])
-                j += 1
-        return ''.join(result)
-            
-            
+class Solution:
+    def mergeAlternately(self, word1: str, word2: str) -> str:
+        res = ""
+        for f, s in zip(word1,word2):
+            res += f + s
+        if len(word1) > len(word2):
+            res += word1[len(word2):]
+        elif len(word2) > len(word1):
+            res += word2[len(word1):]
+        return res
+        
+        
